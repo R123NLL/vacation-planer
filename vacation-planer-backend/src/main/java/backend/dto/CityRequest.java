@@ -1,42 +1,41 @@
-package backend.vacation_planer.entities;
+package backend.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.*;
-import jakarta.persistence.Table;
+import backend.entities.Country;
+import backend.entities.Hotel;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
 
-@Entity
-@Table(name = "cities")
-public class City {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    @Column(name = "city_name")
+public class CityRequest {
+    private Long countryId;
     private String cityName;
-    @Column(name = "city's_arrival_time")
     private LocalDateTime arrivalTime;
-    @Column(name = "city's_departure_time")
     private LocalDateTime departureTime;
-    @ManyToOne
-    @JoinColumn(name = "city's_hotels")
-    private Hotel[] hotels;
+    private Set<Hotel> hotels;
 
-    public City() {
+    public CityRequest() {
 
     }
 
-    public City(String cityName, LocalDateTime arrivalTime, LocalDateTime departureTime, Hotel[] hotels) {
+    public CityRequest(Long countryId, String cityName, LocalDateTime arrivalTime, LocalDateTime departureTime, Set<Hotel> hotels) {
+        this.countryId = countryId;
         this.cityName = cityName;
         this.arrivalTime = arrivalTime;
         this.departureTime = departureTime;
         this.hotels = hotels;
     }
 
-    public Long getId() {
-        return Id;
+    public Long getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Long countryId) {
+        this.countryId = countryId;
     }
 
     public String getCityName() {
@@ -63,11 +62,11 @@ public class City {
         this.departureTime = departureTime;
     }
 
-    public Hotel[] getHotels() {
+    public Set<Hotel> getHotels() {
         return hotels;
     }
 
-    public void setHotels(Hotel[] hotels) {
+    public void setHotels(Set<Hotel> hotels) {
         this.hotels = hotels;
     }
 
@@ -75,25 +74,23 @@ public class City {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        City city = (City) o;
-        return Objects.equals(Id, city.Id) && Objects.equals(cityName, city.cityName) && Objects.equals(arrivalTime, city.arrivalTime) && Objects.equals(departureTime, city.departureTime) && Arrays.equals(hotels, city.hotels);
+        CityRequest that = (CityRequest) o;
+        return Objects.equals(countryId, that.countryId) && Objects.equals(cityName, that.cityName) && Objects.equals(arrivalTime, that.arrivalTime) && Objects.equals(departureTime, that.departureTime) && Objects.equals(hotels, that.hotels);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(Id, cityName, arrivalTime, departureTime);
-        result = 31 * result + Arrays.hashCode(hotels);
-        return result;
+        return Objects.hash(countryId, cityName, arrivalTime, departureTime, hotels);
     }
 
     @Override
     public String toString() {
-        return "City{" +
-                "Id=" + Id +
+        return "CityRequest{" +
+                "countryId=" + countryId +
                 ", cityName='" + cityName + '\'' +
                 ", arrivalTime=" + arrivalTime +
                 ", departureTime=" + departureTime +
-                ", hotels=" + Arrays.toString(hotels) +
+                ", hotels=" + hotels +
                 '}';
     }
 }

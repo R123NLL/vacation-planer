@@ -1,48 +1,40 @@
-package backend.vacation_planer.entities;
+package backend.dto;
 
-import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-@Entity
-@Table(name = "hotels")
-public class Hotel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "hotel_name")
+public class HotelRequest {
+    private Long cityId;
     private String hotelName;
-    @Column(name = "hotel_price")
     private int price;
-    @Column(name = "num_of_guests")
     private int numOfGuests;
-    @Column(name = "hotel's_arrival_time")
     private LocalDateTime arrivalTime;
-    @Column(name = "hotel's_departure_time")
     private LocalDateTime departureTime;
-    @Column(name = "num_of_nights")
     private int numOfNights = (int) ChronoUnit.DAYS.between(arrivalTime, departureTime);
-    @Column(name = "link_to_site")
     private String linkToSite;
 
-    public Hotel() {
+    public HotelRequest() {
 
     }
 
-    public Hotel(String hotelName, int price, int numOfGuests, LocalDateTime arrivalTime, LocalDateTime departureTime, int numOfNights, String linkToSite) {
+    public HotelRequest(Long cityId, String hotelName, int price, int numOfGuests, LocalDateTime arrivalTime, LocalDateTime departureTime, String linkToSite) {
+        this.cityId = cityId;
         this.hotelName = hotelName;
         this.price = price;
         this.numOfGuests = numOfGuests;
         this.arrivalTime = arrivalTime;
         this.departureTime = departureTime;
-        this.numOfNights = numOfNights;
         this.linkToSite = linkToSite;
     }
 
-    public Long getId() {
-        return id;
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public String getHotelName() {
@@ -105,19 +97,19 @@ public class Hotel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Hotel hotel = (Hotel) o;
-        return price == hotel.price && numOfGuests == hotel.numOfGuests && numOfNights == hotel.numOfNights && Objects.equals(id, hotel.id) && Objects.equals(hotelName, hotel.hotelName) && Objects.equals(arrivalTime, hotel.arrivalTime) && Objects.equals(departureTime, hotel.departureTime) && Objects.equals(linkToSite, hotel.linkToSite);
+        HotelRequest that = (HotelRequest) o;
+        return price == that.price && numOfGuests == that.numOfGuests && numOfNights == that.numOfNights && Objects.equals(cityId, that.cityId) && Objects.equals(hotelName, that.hotelName) && Objects.equals(arrivalTime, that.arrivalTime) && Objects.equals(departureTime, that.departureTime) && Objects.equals(linkToSite, that.linkToSite);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, hotelName, price, numOfGuests, arrivalTime, departureTime, numOfNights, linkToSite);
+        return Objects.hash(cityId, hotelName, price, numOfGuests, arrivalTime, departureTime, numOfNights, linkToSite);
     }
 
     @Override
     public String toString() {
-        return "Hotel{" +
-                "id=" + id +
+        return "HotelRequest{" +
+                "cityId=" + cityId +
                 ", hotelName='" + hotelName + '\'' +
                 ", price=" + price +
                 ", numOfGuests=" + numOfGuests +

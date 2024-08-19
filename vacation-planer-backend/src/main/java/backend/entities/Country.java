@@ -1,10 +1,11 @@
-package backend.vacation_planer.entities;
+package backend.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "countries")
@@ -14,9 +15,8 @@ public class Country {
     private Long id;
     @Column(name = "name_of_country")
     private String countryName;
-    @OneToMany
-    @JoinColumn(name = "country's_cities")
-    private City[] cities;
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<City> cities = new HashSet<>();
     @Column(name = "country's_arrival_time")
     private LocalDateTime arrivalTime;
     @Column(name = "country's_departure_time")
@@ -26,9 +26,11 @@ public class Country {
 
     }
 
-    public Country(String countryName, City[] cities) {
+    public Country(String countryName, Set<City> cities, LocalDateTime arrivalTime, LocalDateTime departureTime) {
         this.countryName = countryName;
         this.cities = cities;
+        this.arrivalTime = arrivalTime;
+        this.departureTime = departureTime;
     }
 
     public Long getId() {
@@ -43,11 +45,11 @@ public class Country {
         this.countryName = countryName;
     }
 
-    public City[] getCities() {
+    public Set<City> getCities() {
         return cities;
     }
 
-    public void setCities(City[] cities) {
+    public void setCities(Set<City> cities) {
         this.cities = cities;
     }
 
@@ -72,14 +74,12 @@ public class Country {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Country country = (Country) o;
-        return Objects.equals(id, country.id) && Objects.equals(countryName, country.countryName) && Arrays.equals(cities, country.cities);
+        return Objects.equals(id, country.id) && Objects.equals(countryName, country.countryName) && Objects.equals(cities, country.cities) && Objects.equals(arrivalTime, country.arrivalTime) && Objects.equals(departureTime, country.departureTime);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, countryName);
-        result = 31 * result + Arrays.hashCode(cities);
-        return result;
+        return Objects.hash(id, countryName, cities, arrivalTime, departureTime);
     }
 
     @Override
@@ -87,7 +87,9 @@ public class Country {
         return "Country{" +
                 "id=" + id +
                 ", countryName='" + countryName + '\'' +
-                ", cities=" + Arrays.toString(cities) +
+                ", cities=" + cities +
+                ", arrivalTime=" + arrivalTime +
+                ", departureTime=" + departureTime +
                 '}';
     }
 }
