@@ -1,6 +1,7 @@
 package backend.entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -35,6 +36,10 @@ public class Country {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCountryName() {
