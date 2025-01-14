@@ -24,7 +24,7 @@ public class City {
     private LocalDateTime arrivalTime;
     @Column(name = "city's_departure_time", nullable = false)
     private LocalDateTime departureTime;
-    @OneToMany(mappedBy = "cities", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Hotel> hotels;
 
     public City() {
