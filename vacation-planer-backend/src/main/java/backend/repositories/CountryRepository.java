@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
-    boolean existsByName(String countryName);
-    List<City> findByCountryId(Long id);
-
+    boolean existsByCountryName(String countryName);
 }

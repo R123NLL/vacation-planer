@@ -25,7 +25,7 @@ public class HotelController {
         Hotel hotel = new Hotel();
 
         hotel.setHotelName(hotelRequest.getHotelName());
-        hotel.setCity(cityService.getCityById(hotelRequest.getCityId()));
+        hotel.setCity(cityService.getCityDetails(hotelRequest.getCityId()));
         hotel.setArrivalTime(hotelRequest.getArrivalTime());
         hotel.setDepartureTime(hotelRequest.getDepartureTime());
         hotel.setPrice(hotelRequest.getPrice());

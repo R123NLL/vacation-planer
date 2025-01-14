@@ -18,7 +18,7 @@ public class Hotel {
     @Column(name = "hotel_name")
     private String hotelName;
     @Column(name = "hotel_price")
-    private int price;
+    private double price;
     @Column(name = "num_of_guests")
     private int numOfGuests;
     @Column(name = "hotel's_arrival_time")
@@ -70,11 +70,11 @@ public class Hotel {
         this.hotelName = hotelName;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

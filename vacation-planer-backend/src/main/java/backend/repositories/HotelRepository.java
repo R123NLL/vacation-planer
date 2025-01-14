@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface HotelRepository extends JpaRepository<Hotel,Long> {
     boolean existsByCityId(Long id);
+    List<Hotel> findByCityId(Long id);
+    List<Hotel> findByCityIdAndPriceLessThanEqual(Long id, double maxPrice);
+
 }
