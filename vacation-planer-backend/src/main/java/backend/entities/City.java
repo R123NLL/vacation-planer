@@ -14,7 +14,7 @@ import java.util.Set;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
@@ -39,7 +39,11 @@ public class City {
     }
 
     public Long getId() {
-        return Id;
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCityName() {
@@ -79,18 +83,18 @@ public class City {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return Objects.equals(Id, city.Id) && Objects.equals(country, city.country) && Objects.equals(cityName, city.cityName) && Objects.equals(arrivalTime, city.arrivalTime) && Objects.equals(departureTime, city.departureTime) && Objects.equals(hotels, city.hotels);
+        return Objects.equals(id, city.id) && Objects.equals(country, city.country) && Objects.equals(cityName, city.cityName) && Objects.equals(arrivalTime, city.arrivalTime) && Objects.equals(departureTime, city.departureTime) && Objects.equals(hotels, city.hotels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, country, cityName, arrivalTime, departureTime, hotels);
+        return Objects.hash(id, country, cityName, arrivalTime, departureTime, hotels);
     }
 
     @Override
     public String toString() {
         return "City{" +
-                "Id=" + Id +
+                "id=" + id +
                 ", country=" + country +
                 ", cityName='" + cityName + '\'' +
                 ", arrivalTime=" + arrivalTime +
