@@ -19,7 +19,7 @@ public class City {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
     @Column(name = "city_name", nullable = false)
-    private String cityName;
+    private String name;
     @Column(name = "city's_arrival_time", nullable = false)
     private LocalDateTime arrivalTime;
     @Column(name = "city's_departure_time", nullable = false)
@@ -32,7 +32,7 @@ public class City {
     }
 
     public City(String cityName, LocalDateTime arrivalTime, LocalDateTime departureTime, Set<Hotel> hotels) {
-        this.cityName = cityName;
+        this.name = cityName;
         this.arrivalTime = arrivalTime;
         this.departureTime = departureTime;
         this.hotels = hotels;
@@ -47,11 +47,11 @@ public class City {
     }
 
     public String getCityName() {
-        return cityName;
+        return name;
     }
 
     public void setCityName(String cityName) {
-        this.cityName = cityName;
+        this.name = cityName;
     }
 
     public LocalDateTime getArrivalTime() {
@@ -83,12 +83,12 @@ public class City {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return Objects.equals(id, city.id) && Objects.equals(country, city.country) && Objects.equals(cityName, city.cityName) && Objects.equals(arrivalTime, city.arrivalTime) && Objects.equals(departureTime, city.departureTime) && Objects.equals(hotels, city.hotels);
+        return Objects.equals(id, city.id) && Objects.equals(country, city.country) && Objects.equals(name, city.name) && Objects.equals(arrivalTime, city.arrivalTime) && Objects.equals(departureTime, city.departureTime) && Objects.equals(hotels, city.hotels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, country, cityName, arrivalTime, departureTime, hotels);
+        return Objects.hash(id, country, name, arrivalTime, departureTime, hotels);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class City {
         return "City{" +
                 "id=" + id +
                 ", country=" + country +
-                ", cityName='" + cityName + '\'' +
+                ", cityName='" + name + '\'' +
                 ", arrivalTime=" + arrivalTime +
                 ", departureTime=" + departureTime +
                 ", hotels=" + hotels +

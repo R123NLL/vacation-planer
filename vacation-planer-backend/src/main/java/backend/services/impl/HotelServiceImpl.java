@@ -1,6 +1,5 @@
 package backend.services.impl;
 
-import backend.entities.Category;
 import backend.entities.Hotel;
 import backend.entities.UserType;
 import backend.repositories.CityRepository;
@@ -13,69 +12,57 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 
-
-
 @Service
-public class HotelServiceImpl extends AuthServiceBase implements HotelService{
+public class HotelServiceImpl extends AuthServiceBase implements HotelService {
     @Autowired
     private HotelRepository hotelRepository;
+
     @Autowired
     private CityRepository cityRepository;
+
     @Autowired
     private CountryRepository countryRepository;
 
-    private Long userId;
+    @Autowired
+    private LoginServiceImpl loginService;
+
     private static final Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class);
 
-    public HotelServiceImpl(){
-
+    public boolean login(String username, String password, UserType userType) {
+        boolean isLoggedIn = loginService.login(username, password, userType);
+        if (isLoggedIn) {
+            setLoggedInUserId(loginService.getLoggedInUserId());
+        }
+        return isLoggedIn;
     }
 
-    public boolean login(String username, String password, UserType userType){
-        return new LoginServiceImpl().login(username,password,userType);
-    }
     @Override
     public List<Hotel> getAllHotels() {
+        ensureLoggedIn(getLoggedInUserId());
         return hotelRepository.findAll();
     }
-
     @Override
-    public Hotel addHotel(Hotel hotel){
+    public Hotel addHotel(Hotel hotel) {
+        ensureLoggedIn(getLoggedInUserId());
         return hotelRepository.save(hotel);
     }
-
     @Override
     public Hotel updateHotel(Hotel hotel) {
-        return null;
+        ensureLoggedIn(getLoggedInUserId());
+        // Logic for updating hotel details
+        return hotelRepository.save(hotel);
     }
-
-    @Override
-    public List<Hotel> getHotels(Long cityId, Category category) {
-        return null;
-    }
-
-    @Override
-    public List<Hotel> getHotels(Long cityId, double maxPrice) {
-        return null;
-    }
-
     @Override
     public Hotel getHotelDetail(Long hotelId) {
-        ensureLoggedIn(userId);
-        return null;
+        ensureLoggedIn(getLoggedInUserId());
+        return hotelRepository.findById(hotelId)
+                .orElseThrow(() -> new IllegalArgumentException("Hotel not found with ID: " + hotelId));
     }
-
     @Override
     public void deleteHotel(Long hotelId) {
+        ensureLoggedIn(getLoggedInUserId());
         hotelRepository.deleteById(hotelId);
     }
-
-    @Override
-    public Long getIdByNameAndCityName(String hotelName, String cityName) {
-        return null;
-    }
-
 }
