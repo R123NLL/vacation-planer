@@ -24,7 +24,17 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    public Country updateCountry(Country updatedCountry) {
+        return null;
+    }
+
+    @Override
     public void deleteCountry(Long countryId) {
         countryRepository.deleteById(countryId);
+    }
+
+    @Override
+    public Country getCountryDetails(Long countryId) {
+        return null;
     }
 }

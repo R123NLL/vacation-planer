@@ -30,6 +30,22 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    public City addCity(City newCity) {
+        return cityRepository.save(newCity);
+    }
+
+    @Override
+    public City updateCity(City updatedCity) {
+
+        return cityRepository.save(updatedCity);
+    }
+
+    @Override
+    public void deleteCity(Long cityId) {
+
+    }
+
+    @Override
     public City getCityDetails(Long cityId) {
         return cityRepository.findById(cityId)
                 .orElseThrow(() -> new EntityNotFoundException("City not found"));
