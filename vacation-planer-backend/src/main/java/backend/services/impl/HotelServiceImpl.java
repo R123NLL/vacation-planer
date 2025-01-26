@@ -11,23 +11,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class HotelServiceImpl extends AuthServiceBase implements HotelService {
     @Autowired
     private HotelRepository hotelRepository;
-
     @Autowired
     private CityRepository cityRepository;
-
     @Autowired
     private CountryRepository countryRepository;
-
     @Autowired
     private LoginServiceImpl loginService;
-
     private static final Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class);
 
     public boolean login(String username, String password, UserType userType) {
@@ -37,7 +32,6 @@ public class HotelServiceImpl extends AuthServiceBase implements HotelService {
         }
         return isLoggedIn;
     }
-
     @Override
     public List<Hotel> getAllHotels() {
         ensureLoggedIn(getLoggedInUserId());
@@ -49,20 +43,20 @@ public class HotelServiceImpl extends AuthServiceBase implements HotelService {
         return hotelRepository.save(hotel);
     }
     @Override
+    public void deleteHotel(Long hotelId) {
+        ensureLoggedIn(getLoggedInUserId());
+        hotelRepository.deleteById(hotelId);
+    }
+    @Override
     public Hotel updateHotel(Hotel hotel) {
         ensureLoggedIn(getLoggedInUserId());
-        // Logic for updating hotel details
+        //todo Logic for updating hotel details
         return hotelRepository.save(hotel);
     }
     @Override
     public Hotel getHotelDetail(Long hotelId) {
         ensureLoggedIn(getLoggedInUserId());
         return hotelRepository.findById(hotelId)
-                .orElseThrow(() -> new IllegalArgumentException("Hotel not found with ID: " + hotelId));
-    }
-    @Override
-    public void deleteHotel(Long hotelId) {
-        ensureLoggedIn(getLoggedInUserId());
-        hotelRepository.deleteById(hotelId);
+                .orElseThrow(() -> new IllegalArgumentException("Hotel with id: "+hotelId+" not found"));
     }
 }
