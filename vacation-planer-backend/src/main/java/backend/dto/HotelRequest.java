@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class HotelRequest {
     private Long cityId;
-    private String hotelName;
+    private String name;
     private int price;
     private int numOfGuests;
     private LocalDateTime arrivalTime;
@@ -19,9 +19,9 @@ public class HotelRequest {
 
     }
 
-    public HotelRequest(Long cityId, String hotelName, int price, int numOfGuests, LocalDateTime arrivalTime, LocalDateTime departureTime, String linkToSite) {
+    public HotelRequest(Long cityId, String name, int price, int numOfGuests, LocalDateTime arrivalTime, LocalDateTime departureTime, String linkToSite) {
         this.cityId = cityId;
-        this.hotelName = hotelName;
+        this.name = name;
         this.price = price;
         this.numOfGuests = numOfGuests;
         this.arrivalTime = arrivalTime;
@@ -37,12 +37,12 @@ public class HotelRequest {
         this.cityId = cityId;
     }
 
-    public String getHotelName() {
-        return hotelName;
+    public String getName() {
+        return name;
     }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
+    public void setName(String hotelName) {
+        this.name = hotelName;
     }
 
     public int getPrice() {
@@ -98,19 +98,19 @@ public class HotelRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HotelRequest that = (HotelRequest) o;
-        return price == that.price && numOfGuests == that.numOfGuests && numOfNights == that.numOfNights && Objects.equals(cityId, that.cityId) && Objects.equals(hotelName, that.hotelName) && Objects.equals(arrivalTime, that.arrivalTime) && Objects.equals(departureTime, that.departureTime) && Objects.equals(linkToSite, that.linkToSite);
+        return price == that.price && numOfGuests == that.numOfGuests && numOfNights == that.numOfNights && Objects.equals(cityId, that.cityId) && Objects.equals(name, that.name) && Objects.equals(arrivalTime, that.arrivalTime) && Objects.equals(departureTime, that.departureTime) && Objects.equals(linkToSite, that.linkToSite);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cityId, hotelName, price, numOfGuests, arrivalTime, departureTime, numOfNights, linkToSite);
+        return Objects.hash(cityId, name, price, numOfGuests, arrivalTime, departureTime, numOfNights, linkToSite);
     }
 
     @Override
     public String toString() {
         return "HotelRequest{" +
                 "cityId=" + cityId +
-                ", hotelName='" + hotelName + '\'' +
+                ", name='" + name + '\'' +
                 ", price=" + price +
                 ", numOfGuests=" + numOfGuests +
                 ", arrivalTime=" + arrivalTime +

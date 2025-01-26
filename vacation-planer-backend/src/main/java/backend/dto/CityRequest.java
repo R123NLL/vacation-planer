@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class CityRequest {
     private Long countryId;
-    private String cityName;
+    private String name;
     private LocalDateTime arrivalTime;
     private LocalDateTime departureTime;
     private Set<Hotel> hotels;
@@ -22,9 +22,9 @@ public class CityRequest {
 
     }
 
-    public CityRequest(Long countryId, String cityName, LocalDateTime arrivalTime, LocalDateTime departureTime, Set<Hotel> hotels) {
+    public CityRequest(Long countryId, String name, LocalDateTime arrivalTime, LocalDateTime departureTime, Set<Hotel> hotels) {
         this.countryId = countryId;
-        this.cityName = cityName;
+        this.name = name;
         this.arrivalTime = arrivalTime;
         this.departureTime = departureTime;
         this.hotels = hotels;
@@ -38,12 +38,12 @@ public class CityRequest {
         this.countryId = countryId;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getName() {
+        return name;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setName(String cityName) {
+        this.name = cityName;
     }
 
     public LocalDateTime getArrivalTime() {
@@ -75,19 +75,19 @@ public class CityRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CityRequest that = (CityRequest) o;
-        return Objects.equals(countryId, that.countryId) && Objects.equals(cityName, that.cityName) && Objects.equals(arrivalTime, that.arrivalTime) && Objects.equals(departureTime, that.departureTime) && Objects.equals(hotels, that.hotels);
+        return Objects.equals(countryId, that.countryId) && Objects.equals(name, that.name) && Objects.equals(arrivalTime, that.arrivalTime) && Objects.equals(departureTime, that.departureTime) && Objects.equals(hotels, that.hotels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(countryId, cityName, arrivalTime, departureTime, hotels);
+        return Objects.hash(countryId, name, arrivalTime, departureTime, hotels);
     }
 
     @Override
     public String toString() {
         return "CityRequest{" +
                 "countryId=" + countryId +
-                ", cityName='" + cityName + '\'' +
+                ", name='" + name + '\'' +
                 ", arrivalTime=" + arrivalTime +
                 ", departureTime=" + departureTime +
                 ", hotels=" + hotels +

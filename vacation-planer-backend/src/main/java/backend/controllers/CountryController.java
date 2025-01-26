@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/countries")
+@RequestMapping("api/v1/countries")
 public class CountryController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class CountryController {
 
     @PostMapping
     public Country addCountry(@RequestBody CountryRequest countryRequest){
-        Country country = new Country(countryRequest.getCountryName(),
+        Country country = new Country(countryRequest.getName(),
                 countryRequest.getCities(),countryRequest.getArrivalTime(),countryRequest.getDepartureTime());
         return countryService.addCountry(country);
     }

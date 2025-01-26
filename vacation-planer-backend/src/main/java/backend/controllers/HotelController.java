@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hotels")
+@RequestMapping("/api/v1/hotels")
 public class HotelController {
     @Autowired
     private HotelService hotelService;
@@ -24,7 +24,7 @@ public class HotelController {
     public Hotel addHotel(@RequestBody HotelRequest hotelRequest){
         Hotel hotel = new Hotel();
 
-        hotel.setHotelName(hotelRequest.getHotelName());
+        hotel.setHotelName(hotelRequest.getName());
         hotel.setCity(cityService.getCityDetails(hotelRequest.getCityId()));
         hotel.setArrivalTime(hotelRequest.getArrivalTime());
         hotel.setDepartureTime(hotelRequest.getDepartureTime());
